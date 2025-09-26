@@ -11,9 +11,15 @@
     --bg-light: #f9fafb;
     --text-dark: #ffffff;
     --text-light: #111827;
-    --primary: #2563eb;
-    --secondary: #60a5fa;
+    --primary-dark: #2563eb;
+    --primary-light: #1d4ed8;
+    --secondary-dark: #60a5fa;
+    --secondary-light: #3b82f6;
     --green: #22c55e;
+    --intro-gray-dark: #898A8C;
+    --intro-gray-light: #4b5563;
+    --email-light-dark: #60a5fa;
+    --email-light-light: #1e40af;
   }
 
   body {
@@ -23,7 +29,6 @@
     color: var(--text-dark);
     transition: all 0.3s ease;
   }
-
   body.light {
     background: var(--bg-light);
     color: var(--text-light);
@@ -36,40 +41,48 @@
     padding: 15px 20px;
     position: relative;
   }
-
   .logo-title {
     display: flex;
     align-items: center;
     font-size: 1.5rem;
     font-weight: bold;
   }
-
   .logo-title i {
     margin-right: 10px;
     font-size: 1.8rem;
-    color: var(--primary);
+    color: var(--primary-dark);
   }
+  body.light .logo-title i { color: var(--primary-light); }
 
   .logo-title span { color: white; }
-  .logo-title .blue { color: var(--primary); }
+  .logo-title .blue { color: var(--primary-dark); }
+  body.light .logo-title span { color: black; }
+  body.light .logo-title .blue { color: var(--primary-light); }
 
+  /* Toggle button */
   .toggle-btn {
     background: none;
-    border: 2px solid var(--primary);
+    border: 2px solid var(--primary-dark);
     border-radius: 50%;
     width: 35px;
     height: 35px;
     cursor: pointer;
-    color: var(--primary);
+    color: var(--primary-dark);
     font-weight: bold;
+    transition: 0.3s;
+  }
+  body.light .toggle-btn {
+    border-color: var(--primary-light);
+    color: var(--primary-light);
   }
 
   /* Nav menu */
   .nav-toggle {
     font-size: 1.8rem;
     cursor: pointer;
-    color: var(--primary);
+    color: var(--primary-dark);
   }
+  body.light .nav-toggle { color: var(--primary-light); }
 
   .nav-menu {
     position: absolute;
@@ -83,48 +96,49 @@
     gap: 10px;
     min-width: 150px;
     z-index: 10;
+    transform: translateY(-20px);
+    opacity: 0;
+    transition: all 0.3s ease;
   }
-
   body.light .nav-menu { background: var(--bg-light); }
+  .nav-menu.show {
+    display: flex;
+    transform: translateY(0);
+    opacity: 1;
+  }
   .nav-menu a {
     text-decoration: none;
-    color: var(--primary);
+    color: var(--primary-dark);
     font-weight: bold;
     padding:5px;
     border-radius:5px;
   }
+  body.light .nav-menu a { color: var(--primary-light); }
   .nav-menu a:hover { background: rgba(37,99,235,0.2); }
-
-  .intro {
-    text-align: center;
-    margin-top: 50px;
-    font-size: 30px;
-    font-weight: bold;
-  }
-
-  .scroll-text {
-    margin-top: 20px;
-    font-size: 1.2rem;
-    animation: bounce 1s infinite alternate;
+  body.light .nav-menu a:hover { background: rgba(29,78,216,0.2); }
+  .nav-exit {
+    text-align: right;
+    font-size: 1.5rem;
     cursor: pointer;
+    color: red;
   }
 
-  .scroll-text i {
-    display: block;
-    font-size: 2rem;
-    margin-top: 5px;
-    animation: arrow-bounce 1s infinite;
+  /* Intro */
+  .intro { text-align: center; margin-top: 50px; }
+  .intro-title { font-size: 30px; font-weight: bold; }
+  .intro-title .white { color: white; }
+  .intro-title .blue { color: var(--primary-dark); }
+  body.light .intro-title .white { color: black; }
+  body.light .intro-title .blue { color: var(--primary-light); }
+  .intro-desc { margin-top: 10px; color: var(--intro-gray-dark);
+  font-size: 30px;
+    font-weight: bold ;
   }
+  body.light .intro-desc { color: var(--intro-gray-light); }
 
-  @keyframes arrow-bounce {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(10px); }
-  }
-
-  /* Project box */
+  /* Project boxes */
   .project-box {
     border: 1px solid rgba(255,255,255,0.3);
-    : ;
     border-radius: 10px;
     padding: 40px;
     margin: 60px auto;
@@ -134,29 +148,31 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
-    transition: all 0.3s;
     cursor: pointer;
+    transition: all 0.3s;
   }
-keith{
-  color: #696F72D6;
-}
-  .project-box:hover { background: rgba(255,255,255,0.1); 
-    box-shadow: 0 0 10px #2B546D;
+  body.light .project-box {
+    background: rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.2);
   }
 
-  .project-box i {
-    font-size: 1.8rem;
-    color: white;
-    margin-right: 8px;
+  /* Lifted state */
+  .project-box.lifted {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
   }
 
   .project-title { font-weight: bold; font-size: 1.2rem; display:flex; align-items:center; }
-
+  .project-title i.fab.fa-youtube { color: #ff0000; }
   .green-check { color: var(--green); font-weight: bold; margin-top:10px; }
 
+  /* Contact */
   .contact-section { text-align:center; margin:40px 0; }
-  .btn { display:inline-block; padding:10px 20px; margin-top:10px; background:var(--primary); color:white; border:none; border-radius:8px; text-decoration:none; font-weight:bold; cursor:pointer; }
-
+  .btn { display:inline-block; padding:10px 20px; margin-top:10px; background:var(--primary-dark); color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer; }
+  body.light .btn { background: var(--primary-light); color:white; }
+f{
+  color: #898A8C;
+}
   /* Email box */
   .email-box {
     border: 1px solid rgba(255,255,255,0.3);
@@ -167,55 +183,62 @@ keith{
     text-align: center;
     background: rgba(255,255,255,0.05);
   }
+  body.light .email-box {
+    background: rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.2);
+  }
+  .email-box i { font-size: 2rem; color: var(--primary-dark); }
+  body.light .email-box i { color: var(--primary-light); }
+  .email { color: var(--email-light-dark); font-weight: bold; }
+  body.light .email { color: var(--email-light-light); }
 
-  .email-box i { font-size: 2rem; color: var(--primary); }
-
-  .email { color: var(--primary); font-weight: bold; }
   .socials { margin-top:15px; display:flex; justify-content:center; gap:20px; }
-  .socials a { font-size:1.5rem; color:var(--primary); text-decoration:none; }
+  .socials a { font-size:1.5rem; color: var(--primary-dark); text-decoration:none; }
+  body.light .socials a { color: var(--primary-light); }
 
-  footer { text-align:center; padding:20px; border-top:1px solid var(--primary); margin-top:30px; }
+  footer { text-align:center; padding:20px; border-top:1px solid var(--primary-dark); margin-top:30px; }
+  body.light footer { border-top-color: var(--primary-light); }
 </style>
 </head>
 <body>
+
 <header>
-  <button class="toggle-btn" id="themeToggle"></i></i></button>
+  <button class="toggle-btn" id="themeToggle">☀</button>
   <div class="logo-title">
-    <i class="fas fa-code"></i> <span>KEITH TECH <span class="blue">SITE</span></span>
+    <i class="fas fa-laptop"></i> <span>KEITH <span class="blue">TECH</span></span>
   </div>
   <div class="nav-toggle" id="navToggle"><i class="fas fa-bars"></i></div>
   <div class="nav-menu" id="navMenu">
+    <div class="nav-exit" id="navExit"><i class="fas fa-times"></i></div>
     <a href="#p">Projects</a>
-    <a href="#">Email Us</a>
+    <a href="#email">Email Us</a>
     <a href="contact.html">Contact Me</a>
   </div>
 </header>
 
 <div class="intro">
-  <p>KEITH TECH PROJECTS</p>
-  <keith>Explore tools like YouTube Downloader, APK Downloader, TikTok DL and more.</keith>
+  <p class="intro-title"><span class="white">KEITH TECH</span><span class="blue"> PROJECTS </span></p>
+  <p class="intro-desc">Explore tools like YouTube Downloader, APK Downloader, TikTok DL and more.</p>
   <div class="scroll-text" id="scrollDown">
     Scroll Down <i class="fas fa-arrow-down"></i>
   </div>
 </div>
 
-<!-- Project Box -->
-<div class="project-box" onclick="window.open('yt.html','_blank')" id="projects">
-  <div class="project-title"><i class="fab fa-youtube"></i> YOUTUBE DL</div>
-  <keith>Download YouTube videos with high quality.</keith>
+<!-- Projects -->
+<div class="project-box" onclick="liftAndOpen(this,'yt.html')">
+  <div class="project-title"><i class="fab fa-youtube"> </i>      YOUTUBE DL</div>
+  <f>Download YouTube videos with high quality.</f>
   <div class="green-check">✔ High quality</div>
 </div>
-
-<div class="project-box" onclick="window.open('apk.html','_blank')" id="projects">
-  <div class="project-title"><i class="fas fa-download"></i>APK DL</div>
-  <keith>Download Premium APKs faster .</keith>
-  <div class="green-check">✔ Faster </div>
+<div class="project-box" onclick="liftAndOpen(this,'apk.html')">
+  <div class="project-title"><i class="fas fa-download"></i> APK DL</div>
+  <f>Download Premium APKs faster.</f>
+  <div class="green-check">✔ Faster</div>
 </div>
-
-<div class="project-box" onclick="window.open('js.html','_blank')" id="projects">
-  <div class="project-title"><i class="fab fa-js"></i>JS OBFUSCATOR</div>
-  <keith>Obfuscate your js codes.</keith>
-  <div class="green-check">✔ Strong </div>
+<div class="project-box" onclick="liftAndOpen(this,'js.html')">
+  <div class="project-title"><i class="fab fa-js"></i> JS OBFUSCATOR</div>
+  <f>Obfuscate your js codes.</f>
+  <div class="green-check">✔ Strong</div>
 </div>
 
 <div class="contact-section">
@@ -226,10 +249,10 @@ keith{
 <div class="email-box" id="email">
   <i class="fas fa-envelope"></i>
   <p>Email Us</p>
-  <p class="email"><a href="mailto:Keith-tech57@gmail.com">Keith-tech57@gmail.com</a></p>
+  <p class="email">Keith-tech57@gmail.com</p>
   <i class="fas fa-phone"></i>
   <p>Call Us</p>
-  <p class="phone"><a href="+263789745277">+263789745277</a></p>
+  <p class="email">+263789745277</p>
   <div class="socials">
     <a href="https://youtube.com/@Keith-tech57"><i class="fab fa-youtube"></i></a>
     <a href="https://wa.me/263789745277"><i class="fab fa-whatsapp"></i></a>
@@ -250,13 +273,31 @@ keith{
   // Navigation
   const navToggle = document.getElementById('navToggle');
   const navMenu = document.getElementById('navMenu');
-  navToggle.addEventListener('click', ()=>{
-    navMenu.style.display = navMenu.style.display==="flex"?"none":"flex";
-  });
+  const navExit = document.getElementById('navExit');
+  navToggle.addEventListener('click', ()=>{ navMenu.classList.add("show"); });
+  navExit.addEventListener('click', ()=>{ navMenu.classList.remove("show"); });
 
   // Scroll down
   document.getElementById('scrollDown').addEventListener('click', ()=>{
-    document.getElementById('projects').scrollIntoView({behavior:"smooth"});
+    document.querySelector('.project-box').scrollIntoView({behavior:"smooth"});
+  });
+
+  // Lift button logic
+  let currentLifted = null;
+  function liftAndOpen(el,url){
+    if(currentLifted && currentLifted !== el) currentLifted.classList.remove("lifted");
+    el.classList.add("lifted");
+    currentLifted = el;
+    // Open new page after small delay
+    setTimeout(()=>{ window.open(url,"_blank"); }, 300);
+  }
+
+  // Click outside to reset lifted
+  document.addEventListener('click', (e)=>{
+    if(!e.target.closest('.project-box')){
+      if(currentLifted) currentLifted.classList.remove("lifted");
+      currentLifted = null;
+    }
   });
 </script>
 </body>

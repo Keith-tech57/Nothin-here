@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium APK Downloader by Keith</title>
+    <title>APK Downloader by Keith</title>
   <style>
     :root {
         --primary: #1a2a6c; /* Dark Blue */
@@ -384,7 +384,7 @@
                 showLoading();
                 
                 // First fetch the download link
-                fetch(`https://apis-keith.vercel.app/download/apkfab?url=${encodeURIComponent(url)}`)
+                fetch(`https://apis.davidcyriltech.my.id/download/apk?text=${encodeURIComponent(url)}`)
                     .then(response => {
                         if (!response.ok) throw new Error('Failed to get download link');
                         return response.json();
